@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use phpDocumentor\Reflection\Types\Null_;
+>>>>>>> Lesson 2
 
 class PageWebController extends Controller
 {
