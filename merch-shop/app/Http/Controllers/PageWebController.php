@@ -4,13 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-use phpDocumentor\Reflection\Types\Null_;
->>>>>>> Lesson 2
-=======
->>>>>>> Fix unusable import. Add rebase.
+
 
 class PageWebController extends Controller
 {
