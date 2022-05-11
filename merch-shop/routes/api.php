@@ -4,7 +4,7 @@ use App\Http\Controllers\NewsApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageApiController;
-
+use App\Http\Controllers\AppealApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +30,5 @@ Route::apiResource('pages', PageApiController::class)->only([
     'index',
     'show',
 ]);
+
+Route::post('appeal', [AppealApiController::class, 'send']);

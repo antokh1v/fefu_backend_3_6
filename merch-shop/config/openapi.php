@@ -30,6 +30,10 @@ return [
                 [
                     'name'=> 'page',
                     'description' => 'Page',
+                ],
+                [
+                    'name'=> 'appeal',
+                    'description' => 'Appeal',
                 ]
 
             ],
