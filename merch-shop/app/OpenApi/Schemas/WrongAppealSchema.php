@@ -18,10 +18,10 @@ class WrongAppealSchema extends SchemaFactory implements Reusable
         return Schema::object('WrongAppeal')
             ->properties(
                 Schema::object('errors')->properties(
-                    Schema::array('name')->nullable()->items(Schema::string('description')),
-                    Schema::array('phone')->nullable()->items(Schema::string('description')),
-                    Schema::array('email')->nullable()->items(Schema::string('description')),
-                    Schema::array('message')->nullable()->items(Schema::string('description')),
+                    Schema::array('name')->nullable()->items(Schema::string('')),
+                    Schema::array('phone')->nullable()->items(Schema::string('')),
+                    Schema::array('email')->nullable()->items(Schema::string('')),
+                    Schema::array('message')->nullable()->items(Schema::string('')),
                 )
             );
     }
