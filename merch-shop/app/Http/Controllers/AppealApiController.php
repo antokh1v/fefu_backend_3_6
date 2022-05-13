@@ -10,16 +10,16 @@ use App\OpenApi\Responses\AppealSuccessResponse;
 use App\Sanitizers\PhoneSanitizer;
 use Cviebrock\EloquentSluggable\Tests\Models\Post;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 
 #[OpenApi\PathItem]
 class AppealApiController extends Controller
 {
-    #[OpenApi\Operation(tags: ["appeal"], method: "POST")]
+
+    #[OpenApi\Operation]
+    #[OpenApi\Parameters(factory: AppealParameters::class)]
     #[OpenApi\Response(factory: AppealSuccessResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: AppealFailedResponse::class, statusCode: 422)]
-    #[OpenApi\Parameters(factory: AppealParameters::class)]
     public function send(AppealApiRequest $request)
     {
         $data = $request->validated();
