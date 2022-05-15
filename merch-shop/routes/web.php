@@ -25,4 +25,5 @@ Route::get('/news/{slug}', [NewsWebController::class, 'show']);
 Route::get('/appeal', [AppealWebController::class, 'form'])->name('appeal.form');
 Route::post('/appeal', [AppealWebController::class, 'send'])->name('appeal.send');
 
+
 Route::get('/{slug}', PageWebController::class);
