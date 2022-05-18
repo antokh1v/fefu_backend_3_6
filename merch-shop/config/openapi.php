@@ -23,18 +23,22 @@ return [
 
             'tags' => [
 
-                 [
+                [
                     'name' => 'news',
                     'description' => 'News',
-                 ],
+                ],
                 [
-                    'name'=> 'page',
+                    'name' => 'page',
                     'description' => 'Page',
                 ],
                 [
-                    'name'=> 'appeal',
+                    'name' => 'appeal',
                     'description' => 'Appeal',
 
+                ],
+                [
+                    'name' => 'auth',
+                    'description' => 'Auth'
                 ]
 
             ],
