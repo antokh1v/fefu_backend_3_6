@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -28,7 +27,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->renameColumn('vkontakte_id', 'vk_id');
+            $table->renameColumn('vkontakte_logged_in_at', 'vk_logged_in_at');
+            $table->renameColumn('vkontakte_registered_at', 'vk_registered_at');
         });
     }
 };

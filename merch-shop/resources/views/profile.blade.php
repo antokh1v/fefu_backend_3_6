@@ -9,6 +9,11 @@
 <body class="antialiased">
 <h1>Profile</h1>
 <div>
+    <h4>App:</h4>
+    <label>
+        <b> Last login date: </b>{{ $user['app_logged_in_at'] ?? 'Never' }}<br>
+        <b> Registration date: </b>{{ $user['app_registered_at'] ?? 'Never' }}<br>
+    </label>
     <h3>Oauth info:</h3>
     <h4>GitHub:</h4>
     <label>

@@ -36,8 +36,8 @@ return new class extends Migration {
         Schema::table('user', function (Blueprint $table) {
             $table->string('email')->nullable(false)->change();
             $table->string('password')->nullable(false)->change();
-            $table->dropColumn(['github_id', 'github_logged_in_at', 'github_registered_at', 'discord_id',
-                'discord_logged_in_at', 'discord_registered_at', 'app_logged_in_at', 'app_registered_at']);
+            $table->dropColumn(['github_id', 'github_logged_in_at', 'github_registered_at', 'vk_id',
+                'vk_logged_in_at', 'vk_registered_at', 'app_logged_in_at', 'app_registered_at']);
         });
     }
 };
