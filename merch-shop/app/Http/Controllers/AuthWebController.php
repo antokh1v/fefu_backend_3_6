@@ -49,7 +49,16 @@ class AuthWebController extends Controller
     {
         $data = $request->validated();
 
-        $user = User::createFromRequest($data);
+        $user = User::query()
+            ->where('email', $data['email'])
+            ->first();
+
+        if ($user !== null) {
+            $user->updateFromRequest($data);
+        } else {
+            $user = User::createFromRequest($data);
+
+        }
 
         Auth::login($user);
         $request->session()->regenerate();
