@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthApiController;
+use App\Http\Controllers\CatalogApiController;
 use App\Http\Controllers\NewsApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,12 @@ Route::apiResource('news', NewsApiController::class)->only([
         'show',
     ]
 );
+
+Route::apiResource('categories', CatalogApiController::class)->only([
+    'index',
+    'show',
+]);
+
 
 Route::apiResource('pages', PageApiController::class)->only([
     'index',
