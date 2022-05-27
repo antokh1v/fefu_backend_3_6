@@ -27,7 +27,6 @@ class CatalogWebController extends Controller
         } catch (Throwable $e) {
             abort(422, $e->getMessage());
         }
-
         return view('catalog.index', [
             'categories' => $data['categories'],
             'products' => $data['product_query']->orderBy('products.id')->paginate()->appends([
