@@ -23,7 +23,12 @@ class CatalogWebController extends Controller
         } else{
             $query->where('slug', $slug);
         }
-        return view('catalog.catalog', ['categories' => $query->get()]);
+
+        $categories = $query->get();
+        $products = ProductCategory::getTreeProductsBuilder($categories)
+            ->orderBy('id')
+            ->paginate();
+        return view('catalog.catalog', ['categories' => $categories, 'products' => $products]);
     }
 
 }
