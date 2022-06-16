@@ -17,9 +17,9 @@ class CatalogWebController extends Controller
      */
     public function index(string $slug = null): View|Factory|Application
     {
-        $query = ProductCategory::query()->with('children');
+        $query = ProductCategory::query()->with('children', 'products');
 
-        if ($slug == null){
+        if ($slug === null){
             $query->where('parent_id');
         } else{
             $query->where('slug', $slug);
@@ -27,12 +27,13 @@ class CatalogWebController extends Controller
 
         $categories = $query->get();
         try {
-            $products = ProductCategory::getTreeProductBuilder($categories)
+            $products = ProductCategory::getTreeProductsBuilder($categories)
                 ->orderBy('id')
                 ->paginate(15);
         } catch(Throwable $e) {
             abort(422, $e->getMessage());
         }
+
         return view('catalog.catalog', ['categories' => $categories, 'products' => $products]);
     }
 

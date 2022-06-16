@@ -38,7 +38,7 @@ class ProductApiController extends Controller
         }
         $categories = $query->get();
         try {
-            $products = ProductCategory::getTreeProductBuilder($categories)
+            $products = ProductCategory::getTreeProductsBuilder($categories)
                 ->orderBy('id')
                 ->paginate(15);
         } catch (Throwable $e) {
