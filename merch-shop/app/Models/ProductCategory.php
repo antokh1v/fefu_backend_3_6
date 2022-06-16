@@ -29,9 +29,11 @@ class ProductCategory extends Model
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function products(): HasMany{
+    public function products(): HasMany
+    {
         return $this->hasMany(Product::class);
     }
+
 
     /**
      * @throws Exception
