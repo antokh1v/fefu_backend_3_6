@@ -38,7 +38,7 @@ Route::apiResource('categories', CatalogApiController::class)->only([
 
 Route::prefix('catalog')->group(function () {
     Route::get('product/list', [ProductApiController::class, 'index']);
-    Route::get('product/details/{slug}', [ProductApiController::class, 'show']);
+    Route::get('product/details', [ProductApiController::class, 'show']);
 });
 
 Route::apiResource('pages', PageApiController::class)->only([

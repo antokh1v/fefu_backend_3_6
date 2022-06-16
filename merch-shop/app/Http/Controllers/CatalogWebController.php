@@ -34,7 +34,6 @@ class CatalogWebController extends Controller
             abort(422, $e->getMessage());
         }
 
-
         return view('catalog.catalog', ['categories' => $categories, 'products' => $products]);
     }
 
