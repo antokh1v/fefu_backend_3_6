@@ -6,6 +6,7 @@ use App\Models\ProductCategory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Throwable;
 
 class CatalogWebController extends Controller
 {
@@ -25,9 +26,13 @@ class CatalogWebController extends Controller
         }
 
         $categories = $query->get();
-        $products = ProductCategory::getTreeProductsBuilder($categories)
-            ->orderBy('id')
-            ->paginate();
+        try {
+            $products = ProductCategory::getTreeProductBuilder($categories)
+                ->orderBy('id')
+                ->paginate(15);
+        } catch(Throwable $e) {
+            abort(422, $e->getMessage());
+        }
         return view('catalog.catalog', ['categories' => $categories, 'products' => $products]);
     }
 

@@ -2,9 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
-
-class AttributeValueResources extends JsonResource
+/**
+ * @mixin Product
+ */
+class AttributeValueResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

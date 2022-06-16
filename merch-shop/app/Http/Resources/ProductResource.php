@@ -2,9 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
-
-class ProductResources extends JsonResource
+/**
+ * @mixin Product
+ */
+class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,7 +23,7 @@ class ProductResources extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'category' => new CatalogResource($this->productCategory),
-            'attributes' => AttributeValueResources::collection($this->sortedAttributeValues)
+            'attributes' => AttributeValueResource::collection($this->sortedAttributeValues)
         ];
     }
 }
