@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\News;
 
-class NewsResources extends JsonResource
+class NewsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

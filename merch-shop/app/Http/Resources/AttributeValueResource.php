@@ -2,9 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
-
-class PageResources extends JsonResource
+/**
+ * @mixin Product
+ */
+class AttributeValueResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +18,8 @@ class PageResources extends JsonResource
     public function toArray($request)
     {
         return [
-            'title'=> $this->title,
-            'text'=> $this->text,
-            'slug'=> $this->slug
+            'name' => $this->productAttribute->name,
+            'value' => $this->value,
         ];
     }
 }

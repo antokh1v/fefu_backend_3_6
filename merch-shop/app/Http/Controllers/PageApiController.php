@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PageResources;
+use App\Http\Resources\PageResource;
 use App\Models\Page;
 use App\OpenApi\Responses\ListPageResponse;
 use App\OpenApi\Responses\NotFoundResponse;
@@ -23,7 +23,7 @@ class PageApiController extends Controller
     #[OpenApi\Response(factory: ListPageResponse::class, statusCode: 200)]
     public function index()
     {
-        return PageResources::collection(
+        return PageResource::collection(
             Page::query()->paginate(5)
         );
     }
@@ -39,7 +39,7 @@ class PageApiController extends Controller
     #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
     public function show(string $slug)
     {
-        return New PageResources(
+        return New PageResource(
             Page::query()->where('slug',$slug)->firstOrFail()
         );
     }

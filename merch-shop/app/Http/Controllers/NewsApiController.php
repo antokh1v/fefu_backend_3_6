@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
-use App\Http\Resources\NewsResources;
+use App\Http\Resources\NewsResource;
 use App\Models\News;
 use App\OpenApi\Responses\ListNewsResponse;
 use App\OpenApi\Responses\NotFoundResponse;
@@ -24,7 +24,7 @@ class NewsApiController extends Controller
     #[OpenApi\Response(factory: ListNewsResponse::class, statusCode: 200)]
     public function index()
     {
-        return NewsResources::collection(
+        return NewsResource::collection(
             News::query()->published()->paginate(5)
         );
     }
@@ -40,7 +40,7 @@ class NewsApiController extends Controller
     #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
     public function show(string $slug)
     {
-        return new NewsResources(
+        return new NewsResource(
             News::query()->published()->where('slug', $slug)->firstOrFail()
         );
     }
