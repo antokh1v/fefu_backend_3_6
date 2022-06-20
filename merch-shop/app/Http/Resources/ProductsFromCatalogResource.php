@@ -14,15 +14,13 @@ class ProductsFromCatalogResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param Request $request
+     * @param $resource
      * @return array
      */
-    public function toArray($request)
+    public static function collection($resource)
     {
-        return [
-            'name' => $this->name,
-            'price' => $this->price,
-            'slug' => $this->slug,
-        ];
+        return tap(new ProductFromCatalogCollection($resource), function ($collection) {
+            $collection->collects = __CLASS__;
+        });
     }
 }
