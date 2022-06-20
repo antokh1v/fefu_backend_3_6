@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CatalogFormRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductsFromCatalogResource;
 use App\Models\Product;
@@ -19,34 +20,32 @@ use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 class ProductApiController extends Controller
 {
     /**
-     * @param Request $request
+     * @param CatalogFormRequest $request
      * @return AnonymousResourceCollection
      */
     #[OpenApi\Operation(tags: ['product'], method: 'GET')]
     #[OpenApi\Response(factory: ListProductResponse::class, statusCode: 200)]
     #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
     #[OpenApi\Parameters(factory: ListProductParameters::class)]
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(CatalogFormRequest $request): mixed
     {
-        $slug = $request->query('category_slug');
-        $query = ProductCategory::query()
-            ->with('children', 'products');
-        if ($slug !== null) {
-            $query->where('slug', $slug);
-        } else {
-            $query->where('parent_id');
-        }
-        $categories = $query->get();
+        $requestData = $request->validated();
+
+
+        $requestData['slug'] = $requestData['category_slug'] ?? null;
         try {
-            $products = ProductCategory::getTreeProductsBuilder($categories)
-                ->orderBy('id')
-                ->paginate(15);
+            $data = Product::findProducts($requestData);
         } catch (Throwable $e) {
             abort(422, $e->getMessage());
         }
-
-
-        return ProductsFromCatalogResource::collection($products);
+        return ProductsFromCatalogResource::collection(
+            $data['product_query']->orderBy('products.id')->paginate()->appends([
+                'category_slug' => $data['key_params']['category_slug'],
+                'search_query' => $data['key_params']['search_query'],
+                'filters' => $data['key_params']['filters'],
+                'sort_mode' => $data['key_params']['sort_mode']
+            ])
+        )->additional($data['filters']);
     }
 
     /**

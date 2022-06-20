@@ -180,6 +180,12 @@
                                         },
                                         "meta": {
                                             "$ref": "#\/components\/schemas\/PaginatorMeta"
+                                        },
+                                        "filters": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Filter"
+                                            }
                                         }
                                     }
                                 }
@@ -586,6 +592,37 @@
     },
     "components": {
         "schemas": {
+            "Filter": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "integer"
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                },
+                                "isSelected": {
+                                    "type": "boolean"
+                                },
+                                "productCount": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "News": {
                 "type": "object",
                 "properties": {
