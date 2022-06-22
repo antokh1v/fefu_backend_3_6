@@ -91,7 +91,8 @@ class Cart extends Model
         foreach ($this->itemsByProductId as $productId => $cartItem)
         {
             $cartItem->price_item = $cartItem->product->price;
-            $this->price_total = $cartItem->price_item * $cartItem->quantity;
+            $cartItem->price_total = $cartItem->price_item * $cartItem->quantity;
+            $this->price_total+=$cartItem->price_total;
         }
     }
 
