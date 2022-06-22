@@ -47,7 +47,7 @@ Route::apiResource('pages', PageApiController::class)->only([
     'show',
 ]);
 
-Route::post('/cart/set_quantity', [CartApiController::class, 'setQuantity'])->name('setQuantity');
+Route::post('/cart/set_quantity', [CartApiController::class, 'setQuantity']);
 Route::get('/cart/', [CartApiController::class, 'show']);
 
 Route::post('appeal', [AppealApiController::class, 'send']);

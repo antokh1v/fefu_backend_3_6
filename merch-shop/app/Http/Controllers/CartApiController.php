@@ -6,14 +6,20 @@ use App\Http\Requests\CartModificationRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Product;
+use App\OpenApi\RequestBodies\CartModRequestBody;
+use App\OpenApi\Responses\ShowCartResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 
+#[OpenApi\PathItem]
 class CartApiController extends Controller
 {
     /**
      * @return CartResource
      */
+    #[OpenApi\Operation(tags: ['cart'], method: 'GET')]
+    #[OpenApi\Response(factory: ShowCartResponse::class, statusCode: 200)]
     public function show(): CartResource
     {
         $user = Auth::user();
@@ -27,11 +33,12 @@ class CartApiController extends Controller
      * @param CartModificationRequest $request
      * @return CartResource
      */
+    #[OpenApi\Operation(tags: ['cart'], method: 'POST')]
+    #[OpenApi\Response(factory: ShowCartResponse::class, statusCode: 200)]
+    #[OpenApi\RequestBody(factory: CartModRequestBody::class)]
     public function setQuantity(CartModificationRequest $request): CartResource
     {
         $data = $request->validated('modifications');
-        var_dump($request->validated());
-        die;
         $user = Auth::user();
         $sessionId = session()->getId();
         $cart = Cart::getOrCreateCart($user, $sessionId);
