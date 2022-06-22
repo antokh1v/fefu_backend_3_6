@@ -7,6 +7,7 @@ use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Product;
 use App\OpenApi\RequestBodies\CartModRequestBody;
+use App\OpenApi\Responses\NotFoundResponse;
 use App\OpenApi\Responses\ShowCartResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,7 @@ class CartApiController extends Controller
      */
     #[OpenApi\Operation(tags: ['cart'], method: 'POST')]
     #[OpenApi\Response(factory: ShowCartResponse::class, statusCode: 200)]
+    #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
     #[OpenApi\RequestBody(factory: CartModRequestBody::class)]
     public function setQuantity(CartModificationRequest $request): CartResource
     {

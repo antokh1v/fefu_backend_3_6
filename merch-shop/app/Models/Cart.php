@@ -88,6 +88,7 @@ class Cart extends Model
     {
         $this->fillCartItemsByProductId();
 
+        $this->price_total = 0;
         foreach ($this->itemsByProductId as $productId => $cartItem)
         {
             $cartItem->price_item = $cartItem->product->price;
