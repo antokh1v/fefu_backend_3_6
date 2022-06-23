@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthApiController;
 use App\Http\Controllers\CartApiController;
 use App\Http\Controllers\CatalogApiController;
 use App\Http\Controllers\NewsApiController;
+use App\Http\Controllers\OrderApiController;
 use App\Http\Controllers\ProductApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::apiResource('pages', PageApiController::class)->only([
     'show',
 ]);
 
+Route::post('checkout', [OrderApiController::class, 'store'])->middleware('auth:sanctum');
 Route::post('/cart/set_quantity', [CartApiController::class, 'setQuantity']);
 Route::get('/cart/', [CartApiController::class, 'show']);
 

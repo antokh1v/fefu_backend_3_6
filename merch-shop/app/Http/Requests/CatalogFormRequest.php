@@ -27,8 +27,8 @@ class CatalogFormRequest extends FormRequest
     {
         return [
             'category_slug' => ['nullable'],
-            'search_query' => ['nullable'],
-            'sort_mode' => ['nullable', Rule::in([ProductSortType::PRICE_ASC, ProductSortType::PRICE_DESC])],
+            'search_query' => ['nullable', 'string'],
+            'sort_mode' => ['nullable', Rule::in(['price_asc', 'price_desc']), 'string'],
             'filters' => ['nullable', 'array'],
             'filters.*' => ['required', 'array']
         ];
