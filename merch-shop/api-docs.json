@@ -105,6 +105,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
                     }
                 }
             }
@@ -139,9 +142,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Not found"
                     }
                 }
             }
@@ -351,6 +351,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
                     }
                 }
             }
