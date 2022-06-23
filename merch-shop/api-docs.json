@@ -105,6 +105,9 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
                     }
                 }
             }
@@ -139,9 +142,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Not found"
                     }
                 }
             }
@@ -304,6 +304,75 @@
                     },
                     "404": {
                         "description": "Not found"
+                    }
+                }
+            }
+        },
+        "\/api\/cart\/set_quantity": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Handle the incoming request.",
+                "requestBody": {
+                    "description": "Cart modification",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "modifications": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "product_id": {
+                                                    "type": "integer"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Cart"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "\/api\/cart": {
+            "get": {
+                "tags": [
+                    "cart"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Cart"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -592,6 +661,37 @@
     },
     "components": {
         "schemas": {
+            "Cart": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "product": {
+                                    "$ref": "#\/components\/schemas\/Product"
+                                },
+                                "quantity": {
+                                    "type": "integer"
+                                },
+                                "price_item": {
+                                    "format": "double",
+                                    "type": "number"
+                                },
+                                "price_total": {
+                                    "format": "double",
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "price_total": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                }
+            },
             "Filter": {
                 "type": "object",
                 "properties": {
@@ -833,6 +933,10 @@
         {
             "name": "product",
             "description": "Product"
+        },
+        {
+            "name": "cart",
+            "description": "Cart"
         }
     ]
 }

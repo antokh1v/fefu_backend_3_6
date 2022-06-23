@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthApiController;
+use App\Http\Controllers\CartApiController;
 use App\Http\Controllers\CatalogApiController;
 use App\Http\Controllers\NewsApiController;
 use App\Http\Controllers\ProductApiController;
@@ -46,6 +47,8 @@ Route::apiResource('pages', PageApiController::class)->only([
     'show',
 ]);
 
+Route::post('/cart/set_quantity', [CartApiController::class, 'setQuantity']);
+Route::get('/cart/', [CartApiController::class, 'show']);
 
 Route::post('appeal', [AppealApiController::class, 'send']);
 

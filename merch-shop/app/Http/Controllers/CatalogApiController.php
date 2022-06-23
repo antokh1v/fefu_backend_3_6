@@ -18,6 +18,7 @@ class CatalogApiController extends Controller
      */
     #[OpenApi\Operation(tags: ['catalog'], method: 'GET')]
     #[OpenApi\Response(factory: CatalogResponse::class, statusCode: 200)]
+    #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
     public function index(): Responsable
     {
         return CatalogResource::collection(
@@ -31,7 +32,6 @@ class CatalogApiController extends Controller
      */
     #[OpenApi\Operation(tags: ['catalog'], method: 'GET')]
     #[OpenApi\Response(factory: ProductCategoryResponse::class, statusCode: 200)]
-    #[OpenApi\Response(factory: NotFoundResponse::class, statusCode: 404)]
     public function show(string $slug): CatalogResource
     {
         return new CatalogResource(
