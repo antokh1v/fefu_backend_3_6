@@ -113,4 +113,11 @@ class Cart extends Model
             }
         }
     }
+
+    public function isEmpty(): bool
+    {
+        $this->fillCartItemsByProductId();
+
+        return count($this->itemsByProductId) === 0;
+    }
 }

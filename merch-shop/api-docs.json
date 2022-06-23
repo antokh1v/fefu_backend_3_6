@@ -308,6 +308,103 @@
                 }
             }
         },
+        "\/api\/checkout": {
+            "post": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "Create and return an order",
+                "parameters": [
+                    {
+                        "name": "customer_email",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "customer_name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "delivery_type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "default": "courier",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "payment_method",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "default": "cash",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Order creation",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "delivery_address": {
+                                        "type": "object",
+                                        "properties": {
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "street": {
+                                                "type": "string"
+                                            },
+                                            "house": {
+                                                "type": "string"
+                                            },
+                                            "apartment": {
+                                                "type": "integer",
+                                                "nullable": true
+                                            }
+                                        },
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#\/components\/schemas\/Order"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
         "\/api\/cart\/set_quantity": {
             "post": {
                 "tags": [
@@ -741,6 +838,45 @@
                     }
                 }
             },
+            "Order": {
+                "type": "object",
+                "properties": {
+                    "customer_name": {
+                        "type": "string"
+                    },
+                    "customer_email": {
+                        "type": "string"
+                    },
+                    "payment_method": {
+                        "type": "string"
+                    },
+                    "delivery_type": {
+                        "type": "string"
+                    },
+                    "": {
+                        "$ref": "#\/components\/schemas\/Cart"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "city": {
+                                "type": "string"
+                            },
+                            "street": {
+                                "type": "string"
+                            },
+                            "house": {
+                                "type": "string"
+                            },
+                            "apartment": {
+                                "type": "string",
+                                "nullable": true
+                            }
+                        },
+                        "nullable": true
+                    }
+                }
+            },
             "Page": {
                 "type": "object",
                 "properties": {
@@ -907,6 +1043,12 @@
                     }
                 }
             }
+        },
+        "securitySchemes": {
+            "BearerToken": {
+                "type": "http",
+                "scheme": "bearer"
+            }
         }
     },
     "tags": [
@@ -937,6 +1079,10 @@
         {
             "name": "cart",
             "description": "Cart"
+        },
+        {
+            "name": "order",
+            "description": "Order"
         }
     ]
 }
